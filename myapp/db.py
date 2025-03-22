@@ -1,5 +1,5 @@
 from pymongo import MongoClient
 
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb+srv://sivaramakrishnan9952614001:NAMSyRv88taYjp0r@cluster0.5pjy7.mongodb.net/")
 db = client.krishnan
 col2 = db.col2  # Ensure col2 is correctly defined
