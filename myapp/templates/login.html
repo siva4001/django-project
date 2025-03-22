@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<div class="login-container">
+  {% if messages %}
+  {% for message in messages %}
+    <p>{{ message }}</p>
+  {% endfor %}
+{% endif %}
+
+  <form action="/login/" method="POST" class="login-form">
+    {% csrf_token %}
+    <h2>Login</h2>
+    <div class="input-group">
+      <label for="useremail">Enter Your Email-ID</label>
+      <input type="text" id="useremail" name="useremail" required>
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Login</button>
+    <p class="login-link">Don't have an account? <a href="{%url "signup"%}">Signup</a></p>
+    <p class="login-link">Forget password? <a href="{% url 'edit' user.id %}">Edit</a></p>
+
+  </form>
+</div>
+</body>
+</html>

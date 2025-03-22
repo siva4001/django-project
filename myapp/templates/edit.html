@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/edit.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Profile</h1>
+        
+        {% if edit_user %}
+            <form action="{% url 'edit' edit_user.id %}" method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" value="{{ edit_user.username }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" value="{{ edit_user.userdob }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" value="{{ edit_user.useremail }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                        <option value="male" {% if edit_user.usergender == 'male' %}selected{% endif %}>Male</option>
+                        <option value="female" {% if edit_user.usergender == 'female' %}selected{% endif %}>Female</option>
+                        <option value="other" {% if edit_user.usergender == 'other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" value="{{ edit_user.userphone }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" value="{{ edit_user.userpassword }}" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Save Changes</button>
+                <a href="{% url 'get' %}" class="btn-cancel">Cancel</a>
+            </form>
+        {% else %}
+            <p>No user selected for editing.</p>
+        {% endif %}
+
+        <h2>All Users</h2>
+        <ul>
+            {% for user in getdatas %}
+                <li>
+                    {{ user.username }} - 
+                    <a href="{% url 'edit' user.id %}">Edit</a>
+                    <a href="{% url 'delete' user.id %}">Delete</a>
+                </li>
+            {% endfor %} 
+</ul>
+    </div>
+</body>
+</html>

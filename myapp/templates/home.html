@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MyWebsite</div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="{% url 'login' %}" class="btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to MyWebsite</h1>
+        <p>Explore amazing features and services.</p>
+        <a href="signin.html" class="btn">Get Started</a>
+    </section>
+
+    <section class="features">
+        <div class="feature-box">
+            <h2>Fast & Secure</h2>
+            <p>Experience top-notch security and blazing speed.</p>
+        </div>
+        <div class="feature-box">
+            <h2>User Friendly</h2>
+            <p>Easy to navigate and simple to use for everyone.</p>
+        </div>
+        <div class="feature-box">
+            <h2>24/7 Support</h2>
+            <p>We are always here to assist you anytime.</p>
+        </div>
+    </section>
+
+    {% if user_id %}
+    <footer>
+        <p><a href="{% url 'edit' user_id %}">Edit your profile</a></p>
+        <p>© 2025 MyWebsite. All Rights Reserved.</p>
+    </footer>
+    {% endif %}
+</body>
+</html>
